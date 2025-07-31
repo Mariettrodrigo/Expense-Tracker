@@ -12,7 +12,7 @@ exports.registerUser = async (req, res) => {
 
     //validation: check for mising fields
     if(!fullName || !email || !password){
-        return res.statu(400).json({message: "All fields are required"});
+        return res.status(400).json({message: "All fields are required"});
     }
 
     try{
@@ -38,12 +38,29 @@ exports.registerUser = async (req, res) => {
     } catch (err) {
         res
         .status(500)
-        .json
+        .json({message: "server error", error: err.message });
+        
     }
 };
 
 // login user
-exports.loginUser = async (req, res) => {};
+exports.loginUser = async (req, res) => {
+    const {email,password} = req.body;
+    if (!email || !pasword) {
+        return res.status(400).json({message: "Invalid credentials"});
+    }
+
+    try{
+        res.status(200).json({
+        id: user._id,
+        user,
+        token: generateToken(user._id),
+    });
+} catch (err){
+
+}
+
+};
 
 // getUserInfo 
 exports.getUserInfo = async (req, res) => {};
