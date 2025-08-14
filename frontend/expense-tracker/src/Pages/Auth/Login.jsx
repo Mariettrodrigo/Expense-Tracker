@@ -3,11 +3,17 @@ import AuthLayout from '../../Components/layouts/AuthLayout';
 import Input from '../../Components/Inputs/Input'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../Utils/helper';
+import axiosInstance from '../../Utils/axiosinstance';
+import { API_PATHS } from '../../Utils/ApiPaths';
+import { useContext } from 'react';
+import { UserContext } from '../../context/usercontext';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); 
   const [error, setError] = useState(null);
+
+  const {updateUser} = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -33,7 +39,29 @@ const Login = () => {
     setError("");
 
     //login API call
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+        email,
+        password,
+      });
 
+      console.log("Full login API response:", response.data);
+      
+      const { token, user } = response.data;
+
+      if(token) {
+        console.log("Saving token:", token); // Add this line
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message){
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. please try again.");
+      }
+    }
   };
 
   return (
