@@ -11,6 +11,9 @@ import { LuHandCoins, LuWalletMinimal } from 'react-icons/lu';
 import{IoMdCard} from "react-icons/io";
 import { addThousandsSeperator } from '../../Utils/helper';
 import RecentTransactions from '../../Components/Dashboard/RecentTransactions';
+import FinanceOverview from '../../Components/Dashboard/FinanceOverview';
+import ExpenseTransactions from '../../Components/Dashboard/ExpenseTransactions';
+import Last30DaysExpenses from '../../Components/Dashboard/last30DaysExpenses';
 
 const Home = () => {
   useUserAuth();
@@ -52,21 +55,21 @@ const Home = () => {
           <InfoCard
           icon={<IoMdCard />}
           label="Total Balance"
-          value={addThousandsSeperator(DashboardData?.totlalBalance || 0)}
+          value={addThousandsSeperator(DashboardData?.totalBalance || 0)}
           color="bg-primary"
           />
 
           <InfoCard
           icon={<LuWalletMinimal />}
           label="Total Income"
-          value={addThousandsSeperator(DashboardData?.totlalIncome || 0)}
+          value={addThousandsSeperator(DashboardData?.totalIncome || 0)}
           color="bg-orange-500"
           />
 
           <InfoCard
           icon={<LuHandCoins />}
           label="Total Expense"
-          value={addThousandsSeperator(DashboardData?.totlalExpense || 0)}
+          value={addThousandsSeperator(DashboardData?.totalExpense || 0)}
           color="bg-red-500"
           />
           </div>
@@ -76,6 +79,21 @@ const Home = () => {
             transactions={DashboardData?.RecentTransactions}
             onSeeMore={() => navigate("/expense")}
             />
+
+            <FinanceOverview
+            totalBalance={DashboardData?.totalBalance || 0}
+            totalIncome={DashboardData?.totalIncome || 0}
+            totalExpense={DashboardData?.totalExpense || 0}
+            />
+
+            <ExpenseTransactions
+              transactions={DashboardData?.last30DaysExpenses?.transactions || [] }
+              onSeeMore={() => navigate("/expense")}
+              />
+
+              <Last30DaysExpenses
+              data={DashboardData?.last30DaysExpenses?.transactions || []}
+              />
           </div>
       </div>
     </DashboardLayout>
