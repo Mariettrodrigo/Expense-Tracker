@@ -11,6 +11,7 @@ import Home from './Pages/Dashboard/Home';
 import Income from './Pages/Dashboard/Income';
 import Expense from './Pages/Dashboard/Expense';
 import UserProvider from './context/usercontext';
+import {Toaster} from "react-hot-toast";
 
 const App = () => {
   // Check if token exists in local storage
@@ -18,6 +19,7 @@ const App = () => {
 
   return (
     <UserProvider>
+      <div>
       <Router>
         <Routes>
           <Route path="/" element={
@@ -30,6 +32,16 @@ const App = () => {
           <Route path="/expense" element={<Expense />} />
         </Routes>
       </Router>
+      </div>
+
+      <Toaster
+          toastOptions={{
+            className: "",
+            style: {
+              fontSize: '13px'
+            },
+          }}
+          />
     </UserProvider>
   );
 };
