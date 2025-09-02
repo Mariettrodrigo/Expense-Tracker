@@ -7,6 +7,7 @@ const ExpenseOverview = ({ transactions, onExpenseIncome}) => {
     const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
+        console.log("ChartDataArray before preparing:",transactions);
         const result = prepareExpenseLineChartData(transactions);
         setChartData(result);
 
@@ -28,7 +29,9 @@ const ExpenseOverview = ({ transactions, onExpenseIncome}) => {
     </div>
 
     <div className='mt-10'>
-        <CustomLineChart data={chartData} />
+
+        <CustomLineChart 
+           key={chartData.length} data={chartData}/>
     </div>
   </div>
   

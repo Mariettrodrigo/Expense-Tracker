@@ -3,6 +3,8 @@ import { XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaCh
 
 const CustomLineChart = ({data}) => {
 
+    console.log("chart data:", data);
+
     const CustomTooltip = ({ active, payload}) => {
         if (active && payload && payload.length) {
             return(
@@ -19,7 +21,7 @@ const CustomLineChart = ({data}) => {
 
   return <div className='bg-white'>
     <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={data}>
+        <AreaChart key={data.length} data={data}>
         <defs>
             <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor='#875cf5' stopOpacity={0.4} /> 
@@ -29,7 +31,7 @@ const CustomLineChart = ({data}) => {
 
             <CartesianGrid stroke='none'/>
             <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#555"}} stroke='none' />
-            <YAxis tick={{ fontSize: 12, fill: "#555"}} stroke='none' tickFormatter={(value ) => `$${value}`}/>
+            <YAxis tick={{ fontSize: 12, fill: "#555"}} stroke='none'/>
             <Tooltip content={<CustomTooltip/>}/>
 
             <Area type="monotone" dataKey="amount" stroke='#875cf5' fill='url(#incomeGradient)' strokeWidth={3} dot={{ r: 3, fill: "#ab8df8"}} />

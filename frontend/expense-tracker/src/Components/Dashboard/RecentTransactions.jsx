@@ -4,7 +4,7 @@ import moment from 'moment'
 import TransactionInfoCard from '../Cards/TransactionInfoCard'
 
 const RecentTransactions = ({transactions, onSeeMore}) => {
-  
+  console.log("transactions recieved:", transactions);
   return (
     <div className='card'>
       <div className='flex items-center justify-between'>
@@ -16,10 +16,7 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
       </div>
 
       <div className='mt-6'>
-        {Array.isArray(transactions) &&
-        transactions.length ?(
-        transactions.slice(0,5)?.map((item) => 
-          (
+        {transactions?.slice(0,5)?.map((item) => (
             <TransactionInfoCard
             key={item._id}
             title={item.type == 'expense' ? item.category : item.source}
@@ -30,13 +27,12 @@ const RecentTransactions = ({transactions, onSeeMore}) => {
             hideDeleteBtn
             />
         ))
-      ) :(
-        <p className='text-sm
-        text-gray-500'>No recent transactions</p>
-      )}
-      </div>
+      }
     </div>
-  )
-}
+    </div>
+  );
+};
+      
+    
 
 export default RecentTransactions

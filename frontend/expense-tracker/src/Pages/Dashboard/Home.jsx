@@ -35,6 +35,8 @@ const Home = () => {
         `${API_PATHS.DASHBOARD.GET_DATA}`
       );
 
+      console.log("dashboard api response:",response.data)
+
       if (response.data) {
         setDashboardData(response.data);
       }
@@ -78,7 +80,7 @@ const Home = () => {
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
             <RecentTransactions
-            transactions={DashboardData?.RecentTransactions}
+            transactions={DashboardData?.recentTransactions}
             onSeeMore={() => navigate("/expense")}
             />
 
