@@ -8,6 +8,8 @@ import AddIncomeForm from '../../Components/Income/AddIncomeForm';
 import IncomeList from '../../Components/Inputs/IncomeList';
 import DeleteAlert from '../../Components/deleteAlert';
 import { useUserAuth } from '../../hooks/useUserAuth';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const Income = () => {
   useUserAuth();

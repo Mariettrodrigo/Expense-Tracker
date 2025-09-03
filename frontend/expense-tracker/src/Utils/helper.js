@@ -60,5 +60,7 @@ export const prepareExpenseLineChartData = (data = []) => {
         category: item?.category,
     }));
 
+    console.log("Expense line data(chart data):", chartData);
+
     return chartData;
 };

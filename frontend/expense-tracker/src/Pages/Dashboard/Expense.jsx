@@ -8,6 +8,9 @@ import AddExpenseForm from '../../Components/Expense/AddExpenseForm';
 import Modal from '../../Components/Modal';
 import ExpenseList from '../../Components/Expense/ExpenseList';
 import DeleteAlert from '../../Components/deleteAlert';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 
 const Expense = () => {
   useUserAuth();
@@ -89,6 +92,7 @@ const Expense = () => {
 
       setOpenDeleteAlert({ show: false, data: null });
       toast.success("Expense details deleted successfully");
+      
       fetchExpenseDetails();
      } catch (error) {
       console.error(
@@ -125,7 +129,6 @@ const Expense = () => {
 
       useEffect(() => {
         fetchExpenseDetails()
-
         return () => {
         }
       },[] );
@@ -161,7 +164,7 @@ const Expense = () => {
 
              <Modal
            isOpen={openDeleteAlert.show}
-           onClose={() => setOpenDeleteAlert({ show: false, date: null})}
+           onClose={() => setOpenDeleteAlert({ show: false, data: null})}
            title="Delete Expense"
            >
             <DeleteAlert

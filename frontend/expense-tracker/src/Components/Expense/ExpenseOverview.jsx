@@ -9,7 +9,10 @@ const ExpenseOverview = ({ transactions, onExpenseIncome}) => {
     useEffect(() => {
         console.log("ChartDataArray before preparing:",transactions);
         const result = prepareExpenseLineChartData(transactions);
+        console.log("chartdata array after preparing:", result);
+
         setChartData(result);
+        
 
         return () => {};
     }, [transactions]);
@@ -28,10 +31,11 @@ const ExpenseOverview = ({ transactions, onExpenseIncome}) => {
         </button>
     </div>
 
-    <div className='mt-10'>
+    <div className='mt-10'
+        style ={{ height:300}}>
 
-        <CustomLineChart 
-           key={chartData.length} data={chartData}/>
+        <CustomLineChart  
+           data={chartData}/>
     </div>
   </div>
   
